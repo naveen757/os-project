@@ -1,0 +1,155 @@
+                            LOVELY PROFESSSIONAL UUNIVERSITY
+
+school of computer science and engineering faculty of technology and sciences 
+Name of the faculty:Priya Virdhi.                                               Name Of the Student:Vamshi Reddy.
+Course Code:CSE316.                                                                   Admission No:11705309
+Title:Opreating System                                                                Roll NO:20.
+
+Gmail:majji.naveenkumar20@gmail.com
+
+GitHub Link:
+Description:
+Maximum resources need for each process is b/w 1 and p.
+summation of all maximum need is less than p+q.
+Code:
+#include<iostream>
+using namespace std;
+#include<conio.h>
+#include<stdlib.h>
+
+main()
+{
+	int p,r,sum=0,i,j;
+	cout<<"enter no of process\n";
+	cin>>p;
+	cout<<"enter  number of resources avaliable\n";
+	cin>>r;
+	int maxneed[p][r];
+	
+	int avail[][1]={1,1};
+	int safe[p];
+	int allocate[p][r];
+	int totalresources[][1]={10,5};
+	int remain[p][r];
+	char a[r],c,pr[p];
+	for(int i=0;i<r;i++)
+	{
+	cout<<"enter name of resources\n";
+	cout<<"enter '.' after end of resource name";
+	while((c=getchar())!='.')
+		a[i]=c;
+	}
+	for(int i=0;i<r;i++)
+	{
+		cout<<"entered resources are %c\n",a[i];
+	}
+	for(int i=0;i<p;i++)
+	{
+	cout<<"enter name of process\n";
+	cout<<"enter '.' after end of process name";
+	while((c=getchar())!='.')
+		pr[i]=c;
+	}
+		for(int i=0;i<p;i++)
+	{
+		cout<<"entered process are %c\n",pr[i];
+	}
+	for(i=0;i<p;i++)
+	{
+		for(j=0;j<r;j++)
+		{
+			 cout<<"enter max need for process %d:\n",i;
+			cin>>maxneed[i][j];
+			
+		}
+		for(j=0;j<r;j++)
+		{
+			sum=sum+maxneed[i][j];
+		}
+		if(sum<p+r)
+		{
+			cout<<"valid for %dst process\n",i;
+			sum=0;
+		}
+		else
+		{
+			cout<<"invalid";
+	  exit(0);
+		}
+		
+	}
+	for(i=0;i<p;i++)
+	{
+		for(j=0;j<r;j++)
+		{
+			 cout<<"enter allocation for process %d:\n",i;
+			cin>>allocate[i][j];
+			
+		}
+	}
+	for(i=0;i<p;i++)
+	{
+		for(j=0;j<r;j++)
+		{
+			 if(allocate[i][j]<=maxneed[i][j])
+			 {
+			 	continue;
+			 }
+			 else
+			 {
+			 	printf("invalid\n");
+			   exit(0);
+			 }
+			
+		}
+	}
+	for(i=0;i<p;i++)
+	{
+		for(j=0;j<r;j++)
+		{
+		  remain[i][j]=maxneed[i][j]-allocate[i][j];
+		}
+	}
+	cout<<"remaining need\n";
+	for(i=0;i<p;i++)
+	{
+		for(j=0;j<r;j++)
+		{
+		cout<<"\t",remain[i][j];
+		}
+		cout<<"\n";
+	}
+	for(i=0;i<p;i++)
+	{
+		for(j=0;j<r;j++)
+		{
+		if(avail[0][0]<remain[i][j]&&avail[0][1]<remain[i][j+1])
+		{
+			avail[0][0]=avail[0][0]+allocate[i][j];
+			avail[0][1]=avail[0][1]+allocate[i][j+1];
+		}
+		}
+		safe[i]=1;
+	}
+	for(i=0;i<p;i++)
+	{
+		if(safe[i]!=1)
+		{
+			cout<<"it is deadlock\n";
+			exit(0);
+		}
+		else
+		{
+			cout<<"it is in safe sequence\n";
+			exit(0);
+		}
+	}
+	
+	
+
+	
+		
+	
+	
+	
+}
